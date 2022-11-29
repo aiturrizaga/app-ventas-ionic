@@ -7,6 +7,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-searchbar [formControl]="searchControl" placeholder="Buscar por nombre"></ion-searchbar>
+
+  <ion-button (click)="nuevoVendedor()">Nuevo vendedor</ion-button>
+
   <ion-list>
     <ion-list-header>
       <ion-label>Vendedores</ion-label>
@@ -16,5 +21,5 @@
     </ion-item>
   </ion-list>
 
-  <ion-button (click)="logout()">Cerrar sesión</ion-button>
+  <ion-button color="danger" (click)="logout()">Cerrar sesión</ion-button>
 </ion-content>

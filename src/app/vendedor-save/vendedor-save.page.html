@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nuevo vendedor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="vendedorForm" (ngSubmit)="registerVendedor()">
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input formControlName="nombre" placeholder="Ingrese nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apellido</ion-label>
+      <ion-input formControlName="apellido" placeholder="Ingrese apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>DNI</ion-label>
+      <ion-input formControlName="dni" placeholder="Ingrese DNI"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input formControlName="email" placeholder="Ingrese email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Celular</ion-label>
+      <ion-input formControlName="celular" placeholder="Ingrese celular"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dirección</ion-label>
+      <ion-input formControlName="direccion" placeholder="Ingrese dirección"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Usuario</ion-label>
+      <ion-input formControlName="user" placeholder="Ingrese usuario"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ubigeo:</ion-label>
+      <ion-select formControlName="ubigeo" placeholder="Escoge ubigeo">
+        <ion-select-option *ngFor="let ubigeo of ubigeos" [value]="ubigeo.id">
+          {{ubigeo.departamento}}, {{ubigeo.distrito}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Contraseña</ion-label>
+      <ion-input formControlName="password" type="password" placeholder="Ingrese contraseña"></ion-input>
+    </ion-item>
+    <ion-button type="submit" color="success">
+      Guardar
+    </ion-button>
+    <ion-button [routerLink]="['../home']" type="button" color="danger">
+      Cancelar
+    </ion-button>
+  </form>
+</ion-content>

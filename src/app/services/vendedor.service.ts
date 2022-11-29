@@ -14,4 +14,12 @@ export class VendedorService {
     return this.http.get<VendedorDto[]>(`${environment.apiUrl}/vendedores`);
   }
 
+  register(vendedor: VendedorDto) {
+    return this.http.post<VendedorDto>(`${environment.apiUrl}/vendedores`, vendedor);
+  }
+
+  findByName(nombre: string) {
+    return this.http.get<VendedorDto[]>(`${environment.apiUrl}/vendedores/nombre/${nombre}`);
+  }
+
 }
