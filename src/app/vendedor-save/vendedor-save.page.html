@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Nuevo vendedor</ion-title>
+    <ion-title>{{vendedorService.vendedorSelected ? 'Actualizar vendedor' : 'Nuevo vendedor'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="vendedorForm" (ngSubmit)="registerVendedor()">
+  <form [formGroup]="vendedorForm" (ngSubmit)="save()">
     <ion-item>
       <ion-label>Nombre</ion-label>
       <ion-input formControlName="nombre" placeholder="Ingrese nombre"></ion-input>
@@ -49,7 +49,7 @@
       <ion-input formControlName="password" type="password" placeholder="Ingrese contraseña"></ion-input>
     </ion-item>
     <ion-button type="submit" color="success">
-      Guardar
+      {{vendedorService.vendedorSelected ? 'Actualizar' : 'Guardar'}}
     </ion-button>
     <ion-button [routerLink]="['../home']" type="button" color="danger">
       Cancelar

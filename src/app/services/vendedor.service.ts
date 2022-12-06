@@ -8,6 +8,8 @@ import { VendedorDto } from '../dtos/vendedor.dto';
 })
 export class VendedorService {
 
+  vendedorSelected: VendedorDto | undefined = undefined;
+
   constructor(private http: HttpClient) { }
 
   findAll() {
@@ -16,6 +18,14 @@ export class VendedorService {
 
   register(vendedor: VendedorDto) {
     return this.http.post<VendedorDto>(`${environment.apiUrl}/vendedores`, vendedor);
+  }
+
+  update(vendedor: VendedorDto) {
+    return this.http.put<VendedorDto>(`${environment.apiUrl}/vendedores`, vendedor);
+  }
+
+  delete(id: string) {
+    return this.http.delete(`${environment.apiUrl}/vendedores/delete/${id}`);
   }
 
   findByName(nombre: string) {

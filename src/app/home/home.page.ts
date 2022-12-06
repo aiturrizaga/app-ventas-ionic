@@ -5,13 +5,15 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { debounce, debounceTime, switchMap } from 'rxjs';
+import { ViewWillEnter } from '@ionic/angular';
+import { AlertaService } from '../services/alerta.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements ViewWillEnter {
 
   vendedores: VendedorDto[] = [];
   nombreUsuario = '';
@@ -19,11 +21,12 @@ export class HomePage implements OnInit {
 
   constructor(private vendedorService: VendedorService,
               private authService: AuthService,
+              private alertaService: AlertaService,
               private router: Router) {
     this.nombreUsuario = this.authService.getSession().nombre;
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getVendedores();
     this.initSearch();
   }
@@ -39,8 +42,20 @@ export class HomePage implements OnInit {
     this.router.navigate(['login']).then();
   }
 
-  nuevoVendedor() {
+  guardarVendedor(vendedor?: VendedorDto) {
+    if (vendedor) {
+      this.vendedorService.vendedorSelected = vendedor;
+    }
     this.router.navigate(['vendedor-save']).then();
+  }
+
+  eliminarVendedor(id: string) {
+    this.vendedorService.delete(id).subscribe(() => {
+      this.vendedorService.findAll().subscribe(res => {
+        this.vendedores = res;
+      })
+      this.alertaService.showMessage('Se elimino al vendedor');
+    })
   }
 
   initSearch() {

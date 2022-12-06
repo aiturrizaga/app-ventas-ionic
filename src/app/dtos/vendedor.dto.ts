@@ -5,6 +5,7 @@ export class VendedorDto {
   dni: string = '';
   celular: string = '';
   email: string = '';
+  direccion: string = '';
   estado: string = '';
   user: string = '';
   password: string = '';
